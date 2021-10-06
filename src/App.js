@@ -42,11 +42,28 @@ function App() {
         setGithub(githubLooged)
       })
   }
+  const signOutGithub = () => {
+    signOut(auth)
+      .then(() => {
+        setGithub({});
+        console.log('sign out successfully !!')
+      })
+  }
   return (
     <div className="App">
-      <button onClick={googleSign} >Google Sign in</button>
-      <button onClick={signOutGoogle} >Sign Out Google </button>
-      <button onClick={handleGithub}> Github</button>
+      <div>
+        {!myUser.name ?
+          <button onClick={googleSign} >Google Sign in</button>
+          :
+          <button onClick={signOutGoogle} >Sign Out Google </button>
+        }
+      </div>
+
+      {!github.name ?
+        <button onClick={handleGithub}> Github</button>
+        :
+        <button onClick={signOutGithub} >Sign Out Github </button>
+      }
       {
         myUser.name && <div>
           <h1>Your Name is: {myUser.name}</h1>
